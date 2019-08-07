@@ -4,7 +4,7 @@ const chai      = require('chai');
 const chaiHTTP  = require('chai-http');
 const app       = require('../app');
 
-const expect  = chai.expect;
+const should  = chai.should;
 chai.use(chaiHTTP);
 
 describe('api/exercises', () => {
@@ -14,7 +14,7 @@ describe('api/exercises', () => {
       chai.request(app)
         .get('/api/exercises/test')
         .end((error, res) => {
-          expect(res).to.have.status(200);
+          res.should.have.status(200);
         })
     });
   })

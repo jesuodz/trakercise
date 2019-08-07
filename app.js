@@ -16,8 +16,15 @@ app.use(helmet.hidePoweredBy({ setTo: 'PHP/4.2.0' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+let options = {
+  keepAlive: 1,
+  connectTimeoutMS: 30000,
+  useNewUrlParser: true,
+  useCreateIndex: true
+}; 
+
 mongoose
-  .connect(config.MONGO_URI, { useNewUrlParser: true, useCreateIndex: true })
+  .connect(config.MONGO_URI, options)
   .then(() => console.log(`...Connected to MongoDB at ${config.MONGO_URI}...`))
   .catch(err => console.log(err));
 

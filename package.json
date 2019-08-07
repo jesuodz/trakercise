@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon app.js",
     "start": "node app.js",
-    "test": "mocha --timeout 1500 --exit"
+    "test": "mocha --timeout 2500 --exit"
   },
   "keywords": [
     "exercise-tracker",
@@ -27,8 +27,6 @@
   "homepage": "https://github.com/jesuodz/trakercise#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "command-line-args": "^5.0.2",
-    "command-line-usage": "^5.0.5",
     "express": "^4.16.4",
     "helmet": "^3.18.0",
     "mongoose": "^5.5.7"

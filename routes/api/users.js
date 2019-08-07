@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/test', (req, res) => res.json({ 'message': 'api/users/ works!'}));
+const { test, createUser, deleteUsers } = require('../../controllers/user');
+
+router.get('/test', test);
+router.post('/new_user', createUser);
 
 module.exports = router;

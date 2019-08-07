@@ -1,0 +1,42 @@
+{
+  "name": "trakercise",
+  "version": "1.0.0",
+  "description": "Simple exercise tracker application",
+  "main": "app.js",
+  "scripts": {
+    "server": "nodemon app.js",
+    "start": "node app.js",
+    "test": "mocha --timeout 1500 --exit"
+  },
+  "keywords": [
+    "exercise-tracker",
+    "node.js",
+    "react.js",
+    "freecodecamp",
+    "MERN"
+  ],
+  "author": "Jesús Ordosgoitty",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesuodz/trakercise.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesuodz/trakercise/issues"
+  },
+  "homepage": "https://github.com/jesuodz/trakercise#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^5.0.5",
+    "express": "^4.16.4",
+    "helmet": "^3.18.0",
+    "mongoose": "^5.5.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.0"
+  }
+}

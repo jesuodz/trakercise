@@ -4,7 +4,7 @@ const User = require('../models/User');
 const userController = {};
 
 userController.test = (req, res) => {
-  res.json({msg: "Users works!"});
+  res.json({'msg': "'/api/users/' works!"});
 }
 
 userController.getUser = (req, res) => {

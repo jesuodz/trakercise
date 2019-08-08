@@ -6,11 +6,11 @@ const bodyParser  = require('body-parser');
 const helmet      = require('helmet');
 const path        = require('path');
 
-const app = express();
-const config = require('./config')();
+const app     = express();
+const config  = require('./config')();
 
-const users = require('./routes/api/users');
-const exercises = require('./routes/api/exercises');
+const users     = require('./routes/api/users');
+const exercise  = require('./routes/api/exercise');
 
 app.use(helmet.hidePoweredBy({ setTo: 'PHP/4.2.0' }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,7 +29,7 @@ mongoose
   .catch(err => console.log(err));
 
 app.use('/api/users/', users);
-app.use('/api/exercises/', exercises);
+app.use('/api/exercise/', exercise);
 
 app.listen(config.PORT, () => {
   console.log(`...Listening on port ${config.PORT}...`);

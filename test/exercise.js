@@ -10,9 +10,9 @@ chai.use(chaiHTTP);
 describe('api/exercises', () => {
 
   describe("GET /test", () => {
-    it("should return '/api/exercises/ works!'", () => {
+    it("should return '/api/exercise/ works!'", () => {
       chai.request(app)
-        .get('/api/exercises/test')
+        .get('/api/exercise/test/test')
         .end((error, res) => {
           res.should.have.status(200);
         })

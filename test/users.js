@@ -20,10 +20,11 @@ describe('api/users', () => {
   });
 
   describe("GET /test", () => {
-    it("should return '/api/users/ works!'", (done) => {
-      chai.request(app).get('/api/users/test')
+    it("should return '/api/users/' works!'", (done) => {
+      chai.request(app).get('/api/users/test/test')
       .end((error, res) => {
           res.should.have.status(200);
+          res.body.should.have.property("msg", "'/api/users/' works!");
           done();
         });
     });

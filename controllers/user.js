@@ -9,12 +9,12 @@ userController.test = (req, res) => {
 
 userController.createUser = (req, res) => {
 
-  User.findOne({ username: req.body.username }).then( user => {
+  User.findOne({ _id: req.body.username }).then( user => {
     if (user) {
       return res.status(400).json({ 'error': 'username already exists' });
     } else {
       let newUser = new User({
-        username: req.body.username
+        _id: req.body.username
       });
 
       newUser.save()

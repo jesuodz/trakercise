@@ -26,14 +26,22 @@
   },
   "homepage": "https://github.com/jesuodz/trakercise#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
     "express": "^4.16.4",
+    "gravatar": "^1.6.0",
     "helmet": "^3.18.0",
-    "mongoose": "^5.5.7"
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.5.7",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "concurrently": "^4.1.0",
     "mocha": "^6.1.4",
     "nodemon": "^1.19.0"
   }

@@ -1,3 +1,3 @@
 module.exports = {
-  MONGO_URI: 'mongodb://localhost:27017/trackercise'
+  MONGO_URI: 'mongodb://localhost:27017/trakercise'
 };

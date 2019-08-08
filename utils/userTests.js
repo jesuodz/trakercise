@@ -1,7 +1,16 @@
-const uniqueUser = {
-  username: "test21"
-};
+const 
+  validUser = {
+    username: "test21"
+  },
+  invalidUser = {
+    username: "user"
+  },
+  userNotFound = {
+    username: "404notFound"
+  };
 
 module.exports = {
-  uniqueUser: uniqueUser
+  validUser,
+  invalidUser,
+  userNotFound
 };

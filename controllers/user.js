@@ -9,12 +9,11 @@ userController.test = (req, res) => {
 
 userController.getUser = (req, res) => {
   let username = req.params.username;
-  
+
   if ((username.length < 5) || (username.length > 50)) {
     return res.status(400).json({'error': 'invalid username'});
   }
-
-  User.findOne({ username: req.params.username }).then( user => {
+  User.findById(req.params.username).then(user => {
     if (user) {
       res.json(user);
     } else {
@@ -25,14 +24,14 @@ userController.getUser = (req, res) => {
 
 userController.createUser = (req, res) => {
 
-  User.findOne({ username: req.body.username }).then( user => {
+  User.findById(req.body.username).then( user => {
     if (user) {
       res.status(400).json({ 'error': 'username already exists' });
     } else {
       let newUser = new User({
-        username: req.body.username
+        _id: req.body.username
       });
-      let response = { 'success': `Created '${newUser.username}' user`};
+      let response = { 'success': `Created '${newUser._id}' user`};
       newUser.save()
         .then(user => res.json(response))
         .catch(err => console.log(err));

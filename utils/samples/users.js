@@ -7,10 +7,14 @@ const
   },
   userNotFound = {
     username: "404notFound"
+  },
+  mongoUser = {
+    _id: "test21"
   };
 
 module.exports = {
   validUser,
   invalidUser,
-  userNotFound
+  userNotFound,
+  mongoUser
 };

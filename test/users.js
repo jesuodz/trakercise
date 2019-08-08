@@ -4,12 +4,14 @@ const chai      = require('chai');
 const chaiHTTP  = require('chai-http');
 const app       = require('../app');
 const User      = require('../models/User');
+const users     = require('../utils/samples/users');
 const should    = chai.should();
 const {
   validUser,
   userNotFound,
-  invalidUser
-} = require('../utils/userTests');
+  invalidUser,
+  mongoUser
+} = require('../utils/samples/users');
 
 chai.use(chaiHTTP);
 
@@ -32,11 +34,11 @@ describe('api/users', () => {
 
   describe("GET /:username", () => {
     it("Should return an user object if username is valid", (done) => {
-      User(validUser).save();
+      User(mongoUser).save();
       chai.request(app).get('/api/users/' + validUser.username)
         .then(res => {
           res.should.have.status(200);
-          res.body.should.have.property("username", validUser.username);
+          res.body.should.have.property("_id", validUser.username);
           done();
         }).catch(err => console.log(err));
     });
@@ -69,7 +71,7 @@ describe('api/users', () => {
         }).catch(err => console.log(err));
     });
     it("should return 'error: username already exists'", (done) => {
-      User(validUser).save();
+      User(mongoUser).save();
       chai.request(app).post('/api/users/new_user').send(validUser)
         .then(res => {
           res.should.have.status(400);

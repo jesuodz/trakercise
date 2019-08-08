@@ -6,7 +6,7 @@ const app       = require('../app');
 const mongoose  = require("mongoose");
 const User      = require('../models/User');
 
-const users     = require('../utils/userTests');
+const users     = require('../utils/samples/users');
 const should    = chai.should();
 
 chai.use(chaiHTTP);

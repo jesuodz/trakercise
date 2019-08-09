@@ -11,7 +11,8 @@ const {
   userNotFound,
   invalidUser,
   mongoUser,
-  emptyUser
+  emptyUser,
+  invalidPassword
 } = require('../utils/samples/users');
 
 chai.use(chaiHTTP);
@@ -101,6 +102,47 @@ describe('api/users', () => {
           res.body.should.have.property('confirmPass', 'Confirm password field is required');
           done();
         }).catch(err => console.log(err));
+    });
+  });
+
+  describe("POST /login", () => {
+    it("Should return an error object if password doesn't match", (done) => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(res => {
+        chai.request(app).post('/api/users/login').send(validUser)
+          .then(res => {
+            res.should.have.status(200);
+            res.body.should.have.property('msg', 'success');
+            done();
+          }).catch(err => console.log(err));
+      });
+    });
+    it("Should return an error object if login data is invalid", (done) => {
+      chai.request(app).post('/api/users/login').send(invalidUser)
+        .then(res => {
+          res.should.have.status(400);
+          res.body.should.have.property('username', 'Username must be between 5 and 50 characters');
+          res.body.should.have.property('password', 'Password must be between 8 and 30 characters')
+          done();
+        }).catch(err => console.log(err));
+    });
+    it("Should return an error object if username is not found", (done) => {
+      chai.request(app).post('/api/users/login').send(userNotFound)
+        .then(res => {
+          res.should.have.status(404);
+          res.body.should.have.property('username', 'Username not found');
+          done();
+        }).catch(err => console.log(err));
+    });
+    it("Should return an error object if password doesn't match", (done) => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(res => {
+        chai.request(app).post('/api/users/login').send(invalidPassword)
+          .then(res => {
+            res.should.have.status(400);
+            res.body.should.have.property('password', 'Incorrect password');
+            done();
+          }).catch(err => console.log(err));
+          done();
+      });
     });
   });
 });

@@ -46,7 +46,7 @@ describe('api/users', () => {
       chai.request(app).get('/api/users/' + userNotFound.username)
         .then(res => {
           res.should.have.status(404);
-          res.body.should.have.property('error');
+          res.body.should.have.property('error', 'username not found');
           done();
         }).catch(err => console.log(err));
     });
@@ -54,7 +54,7 @@ describe('api/users', () => {
       chai.request(app).get('/api/users/' + invalidUser.username)
         .then(res => {
           res.should.have.status(400);
-          res.body.should.have.property('error');
+          res.body.should.have.property("username");
           done();
         }).catch(err => console.log(err));
     });

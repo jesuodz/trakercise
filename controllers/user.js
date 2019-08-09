@@ -1,18 +1,19 @@
-const mongoose = require('mongoose');
-const User = require('../models/User');
-
-const userController = {};
+const mongoose        = require('mongoose');
+const User            = require('../models/User');
+const userController  = {};
+const validateUser = require('../validation/user');
 
 userController.test = (req, res) => {
   res.json({'msg': "'/api/users/' works!"});
 }
 
 userController.getUser = (req, res) => {
-  let username = req.params.username;
+  const { errors, isValid } = validateUser(req.params);
 
-  if ((username.length < 5) || (username.length > 50)) {
-    return res.status(400).json({'error': 'invalid username'});
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
+
   User.findById(req.params.username).then(user => {
     if (user) {
       res.json(user);
@@ -23,6 +24,11 @@ userController.getUser = (req, res) => {
 }
 
 userController.createUser = (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   User.findById(req.body.username).then( user => {
     if (user) {

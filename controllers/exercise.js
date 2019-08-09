@@ -3,7 +3,7 @@ const User      = require('../models/User');
 const exerciseController = {};
 
 exerciseController.test = (req, res) => {
-  res.json({ message: 'api/exercise/ works!'});
+  res.json({ msg: '\'/api/exercise/\' works!'});
 }
 
 exerciseController.add = (req, res) => {

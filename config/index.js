@@ -5,7 +5,7 @@ if (NODE_ENV == 'production') {
   try {
     dbKeys = require('./keys_production');
   } catch {
-    console.log("Module ./keys_production.js not found");
+    console.log('Module ./keys_production.js not found');
     process.exit(1);
   }
 } else {

@@ -7,7 +7,7 @@ const validateParamsUser = data => {
   data.username = !isEmpty(data.username) ? data.username : '';
 
   if (!validator.isLength(data.username, { min: 5, max: 50 })) {
-    errors.username = "username must be between 5 and 50 characters";
+    errors.username = 'Username must be between 5 and 50 characters';
   }
 
   return {

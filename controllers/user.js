@@ -5,7 +5,7 @@ const validateParamsUser  = require('../validation/user/params');
 const bcrypt              = require('bcryptjs');
 
 const test = (req, res) => {
-  res.json({'msg': "'/api/users/' works!"});
+  res.json({msg: '\'/api/users/\' works!'});
 }
 
 const getUser = (req, res) => {

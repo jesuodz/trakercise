@@ -22,28 +22,28 @@ describe('api/users', () => {
     User.deleteMany({}, (err, res) => done());	
   });
 
-  describe("GET /test", () => {
-    it("should return '/api/users/' works!'", (done) => {
+  describe('GET /test', () => {
+    it('should return \'/api/users/\' works!', (done) => {
       chai.request(app).get('/api/users/test/test')
       .end((error, res) => {
           res.should.have.status(200);
-          res.body.should.have.property("msg", "'/api/users/' works!");
+          res.body.should.have.property('msg', '\'/api/users/\' works!');
           done();
         });
     });
   });
 
-  describe("GET /:username", () => {
-    it("Should return an user object if username is valid", (done) => {
+  describe('GET /:username', () => {
+    it('Should return an user object if username is valid', (done) => {
       User(mongoUser).save();
       chai.request(app).get('/api/users/' + validUser.username)
         .then(res => {
           res.should.have.status(200);
-          res.body.should.have.property("_id", validUser.username);
+          res.body.should.have.property('_id', validUser.username);
           done();
         }).catch(err => console.log(err));
     });
-    it("Should return 404 if username not found", (done) => {
+    it('Should return 404 if username not found', (done) => {
       chai.request(app).get('/api/users/' + userNotFound.username)
         .then(res => {
           res.should.have.status(404);
@@ -51,27 +51,27 @@ describe('api/users', () => {
           done();
         }).catch(err => console.log(err));
     });
-    it("Should return 400 on invalid username", (done) => {
+    it('Should return 400 on invalid username', (done) => {
       chai.request(app).get('/api/users/' + invalidUser.username)
         .then(res => {
           res.should.have.status(400);
-          res.body.should.have.property("username");
+          res.body.should.have.property('username');
           done();
         }).catch(err => console.log(err));
     });
   });
 
-  describe("POST /new_user", () => {
-    it("Should return an user object is user is valid", (done) => {
+  describe('POST /new_user', () => {
+    it('Should return an user object is user is valid', (done) => {
       chai.request(app).post('/api/users/new_user').send(validUser)
         .then(res => {
           res.should.have.status(200);
-          res.body.should.have.property("_id", validUser.username);
-          res.body.should.have.property("date_created");
+          res.body.should.have.property('_id', validUser.username);
+          res.body.should.have.property('date_created');
           done();
         }).catch(err => console.log(err));
     });
-    it("should return an error object if username exists", (done) => {
+    it('should return an error object if username exists', (done) => {
       User(mongoUser).save();
       chai.request(app).post('/api/users/new_user').send(validUser)
         .then(res => {
@@ -80,7 +80,7 @@ describe('api/users', () => {
           done();
         }).catch(err => console.log(err));
     });
-    it("should return an error object if user fields are not valid", (done) => {
+    it('should return an error object if user fields are not valid', (done) => {
       chai.request(app).post('/api/users/new_user').send(invalidUser)
         .then(res => {
           res.should.have.status(400);
@@ -91,7 +91,7 @@ describe('api/users', () => {
           done();
         });
     });
-    it("should return an error object is user fields are empty", (done) => {
+    it('should return an error object is user fields are empty', (done) => {
       chai.request(app).post('/api/users/new_user').send(emptyUser)
         .then(res => {
           res.should.have.status(400);

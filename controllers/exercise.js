@@ -6,30 +6,15 @@ const test = (req, res) => {
 }
 
 const add = (req, res) => {
-
-  let exercise = {
+  const newExercise = new Exercise({
     user_id: req.body.username,
     description: req.body.description,
     duration: req.body.duration
-  }
-
-  User.findById(req.body.username).then(user => {
-    let newExercise = new Exercise(exercise);
-
-    if (user) {
-      newExercise.save().then(exercise => {
-        return res.json(exercise);
-      });
-    } else {
-      let newUser = new User({_id: req.body.username});
-
-      newUser.save().then(user => {
-        newExercise.save().then(exercise => {
-          return res.json(exercise);
-        });
-      });
-    }
   });
-}
+
+  newExercise.save().then(exercise => {
+    return res.json(exercise);
+  }).catch(err => console.log(err));
+};
 
 module.exports = { test, add };

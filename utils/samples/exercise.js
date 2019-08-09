@@ -2,11 +2,11 @@ const
   validExercise = {
     username: 'jesuodz',
     description: 'Abdominals',
-    duration: 6
+    duration: "6"
   },
   invalidExercise = {
     username: 'test',
-    description: 'Push up'
+    description: 'Push'
   };
 
 module.exports = {

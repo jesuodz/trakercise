@@ -1,0 +1,9 @@
+.landing {
+  height: 100vh;
+  padding-bottom: 180px;
+}
+.landing-inner {
+  height: inherit;
+  display:flex;
+  align-items: center;
+}

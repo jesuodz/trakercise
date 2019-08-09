@@ -4,6 +4,7 @@
   "description": "Simple exercise tracker application",
   "main": "app.js",
   "scripts": {
+    "client": "npm start --prefix client",
     "server": "nodemon app.js",
     "start": "node app.js",
     "test": "mocha --timeout 2500 --exit"

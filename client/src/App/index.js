@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+import Landing from './scenes/Landing';
+
+import './index.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Hell Ow</p>
+        <Landing />
       </div>
     );
   }

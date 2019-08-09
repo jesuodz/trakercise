@@ -16,15 +16,16 @@ userController.getUser = (req, res) => {
 
   User.findById(req.params.username).then(user => {
     if (user) {
-      res.json(user);
+      return res.json(user);
     } else {
-      res.status(404).json({'error': 'username not found'})
+      errors.username = 'username not found';
+      res.status(404).json(errors);
     }
   });
 }
 
-userController.createUser = (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+userController.newUser = (req, res) => {
+  const { errors, isValid } = validateUser(req.body);
 
   if (!isValid) {
     return res.status(400).json(errors);
@@ -32,14 +33,15 @@ userController.createUser = (req, res) => {
 
   User.findById(req.body.username).then( user => {
     if (user) {
-      res.status(400).json({ 'error': 'username already exists' });
+      errors.username = 'username already exists';
+      return res.status(400).json(errors);
     } else {
       let newUser = new User({
         _id: req.body.username
       });
-      let response = { 'success': `Created '${newUser._id}' user`};
+
       newUser.save()
-        .then(user => res.json(response))
+        .then(user => res.json(user))
         .catch(err => console.log(err));
     }
   });

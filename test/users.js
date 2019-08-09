@@ -46,7 +46,7 @@ describe('api/users', () => {
       chai.request(app).get('/api/users/' + userNotFound.username)
         .then(res => {
           res.should.have.status(404);
-          res.body.should.have.property('error', 'username not found');
+          res.body.should.have.property('username', 'username not found');
           done();
         }).catch(err => console.log(err));
     });
@@ -61,21 +61,21 @@ describe('api/users', () => {
   });
 
   describe("POST /new_user", () => {
-    it("should return a 'success' object", (done) => {
-      let msg = `Created '${validUser.username}' user`;
+    it("Should return an user object is user is valid", (done) => {
       chai.request(app).post('/api/users/new_user').send(validUser)
         .then(res => {
           res.should.have.status(200);
-          res.body.should.have.property("success", msg);
+          res.body.should.have.property("_id", validUser.username);
+          res.body.should.have.property("date_created");
           done();
         }).catch(err => console.log(err));
     });
-    it("should return 'error: username already exists'", (done) => {
+    it("should return an error object if username exists", (done) => {
       User(mongoUser).save();
       chai.request(app).post('/api/users/new_user').send(validUser)
         .then(res => {
           res.should.have.status(400);
-          res.body.should.have.property('error', 'username already exists');
+          res.body.should.have.property('username', 'username already exists');
           done();
         }).catch(err => console.log(err));
     });

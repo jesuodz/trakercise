@@ -2,9 +2,7 @@ const Exercise  = require('../models/Exercise');
 const User      = require('../models/User');
 const exerciseController = {};
 
-exerciseController.test = (req, res) => {
-  res.json({ msg: '\'/api/exercise/\' works!'});
-}
+exerciseController.test = (req, res) => res.json({ msg: '\'/api/exercise/\' works!'});
 
 exerciseController.add = (req, res) => {
 

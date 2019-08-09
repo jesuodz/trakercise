@@ -1,12 +1,11 @@
 const Exercise  = require('../models/Exercise');
 const User      = require('../models/User');
-const exerciseController = {};
 
-exerciseController.test = (req, res) => {
+const test = (req, res) => {
   res.json({ msg: '\'/api/exercise/\' works!'});
 }
 
-exerciseController.add = (req, res) => {
+const add = (req, res) => {
 
   let exercise = {
     user_id: req.body.username,
@@ -33,4 +32,4 @@ exerciseController.add = (req, res) => {
   });
 }
 
-module.exports = exerciseController;
+module.exports = { test, add };

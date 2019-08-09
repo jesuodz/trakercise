@@ -9,7 +9,8 @@ const ExerciseSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    minlength: 5
+    minlength: 5,
+    maxlength: 140
   },
   duration: {
     type: Number,

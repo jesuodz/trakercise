@@ -12,12 +12,18 @@ const
     confirmPass: '123455aa'
   },
   userNotFound = {
-    username: "404notFound"
+    username: "404notFound",
+    email: "usernameNot@found.com",
+    password: "usernamenotfound"
   },
   mongoUser = {
     _id: "test21",
     ...validUser
   },
+  invalidPassword = {
+    username: "test21",
+    password: "abc123"
+  }
   emptyUser = {};
 
 module.exports = {
@@ -25,5 +31,6 @@ module.exports = {
   invalidUser,
   userNotFound,
   mongoUser,
-  emptyUser
+  emptyUser,
+  invalidPassword
 };

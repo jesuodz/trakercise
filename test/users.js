@@ -86,7 +86,7 @@ describe('api/users', () => {
           res.should.have.status(400);
           res.body.should.have.property('username', 'Username must be between 5 and 50 characters');
           res.body.should.have.property('email', 'Email is not valid');
-          res.body.should.have.property('password', 'Password must be between 8 and 30 characters');
+          res.body.should.have.property('password');
           res.body.should.have.property('confirmPass', 'Passwords must match');
           done();
         });
@@ -97,7 +97,7 @@ describe('api/users', () => {
           res.should.have.status(400);
           res.body.should.have.property('username', 'Username is required')
           res.body.should.have.property('email', 'Email field is required');
-          res.body.should.have.property('password', 'Password is required');
+          res.body.should.have.property('password');
           res.body.should.have.property('confirmPass', 'Confirm password field is required');
           done();
         }).catch(err => console.log(err));

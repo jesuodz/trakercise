@@ -2,6 +2,7 @@ const mongoose            = require('mongoose');
 const User                = require('../models/User');
 const validateNewUser     = require('../validation/user/new');
 const validateParamsUser  = require('../validation/user/params');
+const bcrypt              = require('bcryptjs');
 
 const test = (req, res) => {
   res.json({'msg': "'/api/users/' works!"});
@@ -37,9 +38,13 @@ const newUser = (req, res) => {
         password: req.body.password
       });
 
-      newUser.save()
-        .then(user => res.json(user))
-        .catch(err => console.log(err));
+      bcrypt.genSalt(10).then(salt => {
+        bcrypt.hash(newUser.password, salt).then(hash => {
+          newUser.password = hash;
+          newUser.save().then(user => { return res.json(user); })
+            .catch(err => console.log(err));  
+        }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
     }
   });
 };

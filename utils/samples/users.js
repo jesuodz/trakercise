@@ -12,17 +12,17 @@ const
     confirmPass: '123455aa'
   },
   userNotFound = {
-    username: "404notFound",
-    email: "usernameNot@found.com",
-    password: "usernamenotfound"
+    username: '404notFound',
+    email: 'usernameNot@found.com',
+    password: 'usernamenotfound'
   },
   mongoUser = {
     _id: 'test21',
     ...validUser
   },
   invalidPassword = {
-    username: "test21",
-    password: "abc123aa"
+    username: 'test21',
+    password: 'abc123aa'
   }
   emptyUser = {};
 

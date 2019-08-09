@@ -14,12 +14,12 @@ chai.use(chaiHTTP);
 
 describe('api/exercise', () => {
   
-  beforeEach( (done) => {
+  beforeEach( done => {
     Exercise.deleteMany({}, (err, res) => done());
   });
 
   describe('GET /test', () => {
-    it('should return \'/api/exercise/\' works!', (done) => {
+    it('should return \'/api/exercise/\' works!', done => {
       chai.request(app)
         .get('/api/exercise/test/test')
         .end((error, res) => {
@@ -30,7 +30,7 @@ describe('api/exercise', () => {
     });
 
     describe('POST /add', () => {
-      it('should return an object if passed exercise is valid', (done) => {
+      it('should return an object if passed exercise is valid', done => {
         chai.request(app).post('/api/exercise/add').send(validExercise)
           .then(res => {
             res.should.have.status(200);
@@ -40,7 +40,7 @@ describe('api/exercise', () => {
             done();
           }).catch(err => console.log(err));
       });
-      it('should return an error object if passed exercise is invalid', (done) => {
+      it('should return an error object if passed exercise is invalid', done => {
         chai.request(app).post('/api/exercise/add').send(invalidExercise)
           .then(res => {
             res.should.have.status(400);

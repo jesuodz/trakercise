@@ -10,7 +10,8 @@ const {
   validUser,
   userNotFound,
   invalidUser,
-  mongoUser
+  mongoUser,
+  emptyUser
 } = require('../utils/samples/users');
 
 chai.use(chaiHTTP);
@@ -76,6 +77,28 @@ describe('api/users', () => {
         .then(res => {
           res.should.have.status(400);
           res.body.should.have.property('username', 'username already exists');
+          done();
+        }).catch(err => console.log(err));
+    });
+    it("should return an error object if user fields are not valid", (done) => {
+      chai.request(app).post('/api/users/new_user').send(invalidUser)
+        .then(res => {
+          res.should.have.status(400);
+          res.body.should.have.property('username', 'Username must be between 5 and 50 characters');
+          res.body.should.have.property('email', 'Email is not valid');
+          res.body.should.have.property('password', 'Password must be between 8 and 30 characters');
+          res.body.should.have.property('confirmPass', 'Passwords must match');
+          done();
+        });
+    });
+    it("should return an error object is user fields are empty", (done) => {
+      chai.request(app).post('/api/users/new_user').send(emptyUser)
+        .then(res => {
+          res.should.have.status(400);
+          res.body.should.have.property('username', 'Username is required')
+          res.body.should.have.property('email', 'Email field is required');
+          res.body.should.have.property('password', 'Password is required');
+          res.body.should.have.property('confirmPass', 'Confirm password field is required');
           done();
         }).catch(err => console.log(err));
     });

@@ -14,6 +14,9 @@ export default class Landing extends Component {
                 <h1 className="display-4 mb-5">
                   Trakercise
                 </h1>
+                <p className="lead">
+                  Create your account and start tracking and sharing your exercise progress!
+                </p>
                 <Link className="btn btn-lg btn-primary" to="/new_user">
                   Sign Up
                 </Link>

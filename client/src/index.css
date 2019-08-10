@@ -16,11 +16,10 @@
   font-weight: 300;
   src: local('Roboto'), url('./fonts/Roboto-Light.woff');
 }
-html,
-body,
-#root {
-  height: 100%;
+* {
+  box-sizing: border-box;
 }
+html,
 body {
   margin: 0;
   padding: 0;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 
 import './index.css';
 
-class Landing extends Component {
+export default class Landing extends Component {
   render() {
     return (
       <div className="landing">
@@ -13,12 +14,12 @@ class Landing extends Component {
                 <h1 className="display-4 mb-5">
                   Trakercise
                 </h1>
-                <a href="/register" className="btn btn-lg btn-info mr-2">
+                <Button color="primary" size="lg" href="/new_user">
                   Sign Up
-                </a>
-                <a href="/login" className="btn btn-lg btn-light">
+                </Button>
+                <Button outline color="secondary" size="lg" href="/login">
                   Login
-                </a>
+                </Button>
               </div>
             </div>
           </div>
@@ -26,6 +27,4 @@ class Landing extends Component {
       </div>
     );
   }
-}
-
-export default Landing;
+};

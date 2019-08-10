@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Landing from './scenes/Landing';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 import './index.css';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Landing />
+        <Header />
+        <div className="App-body">
+          <Landing />
+        </div>
+        <Footer />
       </div>
     );
   }
-}
-
-export default App;
+};

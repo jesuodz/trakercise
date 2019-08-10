@@ -6,12 +6,30 @@ import './index.css';
 export default class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      confirmPass: ''
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(event) {
+  handleChange = event => {
+    this.setState({[event.target.name]:event.target.value});
+  }
+
+  handleSubmit = event => {
     event.preventDefault();
+
+    const newUser = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      confirmPass: this.state.confirmPass
+    }
+    console.log(newUser);
   }
 
   render() {
@@ -34,6 +52,7 @@ export default class Register extends Component {
                     name='username'
                     id='username'
                     placeholder='Must be between 5 and 50 characters.'
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -43,6 +62,7 @@ export default class Register extends Component {
                     name='email'
                     id='email'
                     placeholder='example@example.com'
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -52,6 +72,7 @@ export default class Register extends Component {
                     name='password'
                     id='password'
                     placeholder='Must be between 8 and 30 characters.'
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -61,6 +82,7 @@ export default class Register extends Component {
                     name='confirmPass'
                     id='confirmPass'
                     placeholder='Please repeat your password.'
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <Button

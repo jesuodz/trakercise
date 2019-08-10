@@ -6,13 +6,26 @@ import './index.css';
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: '',
+      password: ''
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(event) {
+  handleChange = event => {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
+  handleSubmit = event => {
     event.preventDefault();
-    console.log(event.target);
+    
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    console.log(user);
   }
 
   render() {
@@ -34,6 +47,7 @@ export default class Login extends Component {
                     name='username'
                     id='username'
                     placeholder='Username'
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -42,6 +56,7 @@ export default class Login extends Component {
                     name='password'
                     id='password'
                     placeholder='Password'
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <Button

@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import {
   Collapse,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
-  NavLink,
   NavItem,
   Nav
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
   constructor(props) {
@@ -23,16 +22,22 @@ export default class Header extends Component {
   render() {
     return(
       <header>
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">Trakercise</NavbarBrand>
+        <Navbar color='dark' dark expand='md'>
+          <Link className="navbar-brand" to='/'>
+            Trakercise
+          </Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href="/new_user">Sign up</NavLink>
+                <Link className='nav-link' to='/new_user'>
+                  Sign up
+                </Link>
               </NavItem>
               <NavItem>
-                <NavLink href="/login">Login</NavLink>
+                <Link className='nav-link' to='/login'>
+                  Login
+                </Link>
               </NavItem>
             </Nav>
           </Collapse>

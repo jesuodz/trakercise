@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import './index.css';
 
@@ -14,17 +14,17 @@ export default class Landing extends Component {
                 <h1 className="display-4 mb-5">
                   Trakercise
                 </h1>
-                <Button color="primary" size="lg" href="/new_user">
+                <Link className="btn btn-lg btn-primary" to="/new_user">
                   Sign Up
-                </Button>
-                <Button outline color="secondary" size="lg" href="/login">
+                </Link>
+                <Link className="btn btn-lg btn-secondary" to="/login">
                   Login
-                </Button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
     );
-  }
+  };
 };

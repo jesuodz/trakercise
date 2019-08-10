@@ -4,6 +4,8 @@ const validateNewUser     = require('../validation/User/new');
 const validateParamsUser  = require('../validation/User/params');
 const validateLogin       = require('../validation/User/login');
 const bcrypt              = require('bcryptjs');
+const jwt                 = require('jsonwebtoken');
+const { SECRET }          = require('../config')();
 
 const test = (req, res) => res.json({msg: '\'/api/users/\' works!'});
 

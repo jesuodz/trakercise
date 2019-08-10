@@ -5,26 +5,20 @@ const mongoose    = require('mongoose');
 const bodyParser  = require('body-parser');
 const helmet      = require('helmet');
 const path        = require('path');
-
-const app     = express();
-const config  = require('./config')();
-
-const users     = require('./routes/api/users');
-const exercise  = require('./routes/api/exercise');
+const passport    = require('passport');
+// Configuration
+const app         = express();
+const config      = require('./config')();
+// Routes
+const users       = require('./routes/api/users');
+const exercise    = require('./routes/api/exercise');
 
 app.use(helmet.hidePoweredBy({ setTo: 'PHP/4.2.0' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
-let options = {
-  keepAlive: 1,
-  connectTimeoutMS: 30000,
-  useNewUrlParser: true,
-  useCreateIndex: true
-}; 
-
-mongoose
-  .connect(config.MONGO_URI, options)
+mongoose.connect(config.MONGO_URI, config.OPTIONS)
   .then(() => console.log(`...Connected to MongoDB at ${config.MONGO_URI}...`))
   .catch(err => console.log(err));
 

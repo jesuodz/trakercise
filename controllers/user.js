@@ -58,10 +58,15 @@ const login = (req, res) => {
   User.findById(req.body.username).then(user => {
     if (user) {
       bcrypt.compare(req.body.password, user.password).then(match => {
-        if (match) return res.json({ msg: 'success' });
-        else {
+        if (match) {
+          const payload = { username: user.id };
+          jwt.sign(payload, SECRET, { expiresIn: 3600 }, (err, token) => {
+            if (err) throw err;
+            res.json({ success: true, token: token });
+          });
+        } else {
           errors.password = 'Incorrect password'
-          return res.json(errors);
+          return res.json({success: false, ...errors});
         }
       }).catch(err => console.log(err));
     } else {

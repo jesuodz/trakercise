@@ -111,7 +111,8 @@ describe('api/users', () => {
         chai.request(app).post('/api/users/login').send(validUser)
           .then(res => {
             res.should.have.status(200);
-            res.body.should.have.property('msg', 'success');
+            res.body.should.have.property('success', true);
+            res.body.should.have.property('token');
             done();
           }).catch(err => console.log(err));
       });
@@ -138,6 +139,7 @@ describe('api/users', () => {
         chai.request(app).post('/api/users/login').send(invalidPassword)
           .then(res => {
             res.should.have.status(400);
+            res.body.should.have.property('success', false);
             res.body.should.have.property('password', 'Incorrect password');
             done();
           }).catch(err => console.log(err));

@@ -4,7 +4,8 @@ module.exports = {
     keepAlive: 1,
     connectTimeoutMS: 30000,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
   },
   SECRET: "SECRECT"
 };

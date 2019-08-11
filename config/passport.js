@@ -12,7 +12,6 @@ module.exports = passport => {
   passport.use(
     new jwtStrategy(options, (jwt_payload, done) => {
       User.findById(jwt_payload.username).then(user => {
-        console.log(user);
         if (user) return done(null, user);
         return done(null, false);
       }).catch(err => console.log(err));

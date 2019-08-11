@@ -1,7 +1,7 @@
 const validator = require('validator');
 const isEmpty   = require('../check-empty');
 
-const validateNewUser = data => {
+const validateLogin = data => {
   let errors = {};
 
   data.username = !isEmpty(data.username) ? data.username : '';
@@ -26,4 +26,4 @@ const validateNewUser = data => {
   };
 };
 
-module.exports = validateNewUser;
+module.exports = validateLogin;

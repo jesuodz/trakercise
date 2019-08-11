@@ -62,7 +62,7 @@ const login = (req, res) => {
           const payload = { username: user.id };
           jwt.sign(payload, SECRET, { expiresIn: 3600 }, (err, token) => {
             if (err) throw err;
-            res.json({ success: true, token: token });
+            res.json({ success: true, token: `Bearer ${token}` });
           });
         } else {
           errors.password = 'Incorrect password'
@@ -76,4 +76,8 @@ const login = (req, res) => {
   });
 };
 
-module.exports = { test, getUser, newUser, login };
+const current = (req, res) => {
+  res.json(req.user);
+};
+
+module.exports = { test, getUser, newUser, login, current };

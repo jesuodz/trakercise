@@ -17,6 +17,7 @@ app.use(helmet.hidePoweredBy({ setTo: 'PHP/4.2.0' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+require('./config/passport')(passport);
 
 mongoose.connect(config.MONGO_URI, config.OPTIONS)
   .then(() => console.log(`...Connected to MongoDB at ${config.MONGO_URI}...`))

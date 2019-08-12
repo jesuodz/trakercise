@@ -5,9 +5,13 @@ const
   },
   invalidExercise = {
     description: 'Push'
+  },
+  wrongID = data => {
+    return data._id.slice(1) + 1;
   };
 
 module.exports = {
   validExercise,
-  invalidExercise
+  invalidExercise,
+  wrongID
 };

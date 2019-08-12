@@ -1,6 +1,7 @@
-const Exercise  = require('../models/Exercise');
-const User      = require('../models/User');
-const validateExercise = require('../validation/Exercise/exercise');
+const Exercise          = require('../models/Exercise');
+const User              = require('../models/User');
+const validateExercise  = require('../validation/Exercise/exercise');
+const validateParamsId  = require('../validation/Exercise/paramsId');
 
 const test = (req, res) => res.json({ msg: '\'/api/exercise/\' works!'});
 
@@ -20,4 +21,20 @@ const add = (req, res) => {
   }).catch(err => console.log(err));
 };
 
-module.exports = { test, add };
+const get = (req, res) => {
+  const { errors, isValid } = validateParamsId(req.params.id);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  Exercise.findById(req.params.id).then(exercise => {
+    if (exercise) return res.json(exercise);
+    else {
+      errors.exercisenotfound = 'Exercise not found';
+      return res.status(404).json(errors);
+    }
+  }).catch(err => console.log(err));
+}
+
+module.exports = { test, add, get };

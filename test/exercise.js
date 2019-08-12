@@ -9,7 +9,8 @@ const should        = chai.should();
 const { validUser } = require('../utils/samples/users');
 const {
   validExercise,
-  invalidExercise
+  invalidExercise,
+  wrongID
 }  = require('../utils/samples/exercise');
 
 chai.use(chaiHTTP);
@@ -65,6 +66,52 @@ describe('api/exercise', () => {
             done();
           }).catch(err => console.log(err));
         });
+    });
+  });
+
+  describe('GET /:exercise', () => {
+    it('Should return an object if passed exercise is valid', done => {
+      chai.request(app).post('/api/users/login').send(validUser).then(res => {
+        const auth = { 'Authorization' : res.body.token };
+        chai.request(app).post('/api/exercise/add').set(auth).send(validExercise)
+          .then(res => {
+            const exercise = res.body;
+            chai.request(app).get('/api/exercise/' + exercise._id).then(res => {
+              res.should.have.status(200);
+              res.body.should.have.property('_id', exercise._id);
+              res.body.should.have.property('user_id', exercise.user_id);
+              res.body.should.have.property('duration', exercise.duration);
+              res.body.should.have.property('description', exercise.description);
+              done();
+            });
+          });
+      });
+    });
+    it('Should return \'Exercise ID not found\' if sent ID is not valid', done => {
+      chai.request(app).post('/api/users/login').send(validUser).then(res => {
+        const auth = { 'Authorization' : res.body.token };
+        chai.request(app).post('/api/exercise/add').set(auth).send(validExercise)
+          .then(() => {
+            chai.request(app).get('/api/exercise/' + 1).then(res => {
+              res.should.have.status(400);
+              res.body.should.have.property('invalidID', 'Exercise ID not found');
+              done();
+            });
+          });
+      });
+    });
+    it('Should return \'Exercise not found\' if sent ID is not found', done => {
+      chai.request(app).post('/api/users/login').send(validUser).then(res => {
+        const auth = { 'Authorization' : res.body.token };
+        chai.request(app).post('/api/exercise/add').set(auth).send(validExercise)
+          .then(res => {
+            chai.request(app).get('/api/exercise/' + wrongID(res.body)).then(res => {
+              res.should.have.status(404);
+              res.body.should.have.property('exercisenotfound', 'Exercise not found');
+              done();
+            });
+          });
+      });
     });
   });
 });

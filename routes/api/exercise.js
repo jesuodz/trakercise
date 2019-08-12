@@ -3,7 +3,8 @@ const router    = express.Router();
 const passport  = require('passport');
 const {
   test,
-  add
+  add,
+  get
 } = require('../../controllers/exercise');
 
 router.get('/test/test', test);
@@ -12,5 +13,6 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   add
 );
+router.get('/:id', get);
 
 module.exports = router;

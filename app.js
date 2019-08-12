@@ -13,7 +13,7 @@ const config      = require('./config')();
 const users       = require('./routes/api/users');
 const exercise    = require('./routes/api/exercise');
 
-app.use(helmet.hidePoweredBy({ setTo: 'PHP/4.2.0' }));
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());

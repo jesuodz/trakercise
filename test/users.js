@@ -109,7 +109,7 @@ describe('api/users', () => {
 
   describe('POST /login', () => {
     it('Should return a token if login is successful', done => {
-      chai.request(app).post('/api/users/new_user').send(validUser).then(res => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
         chai.request(app).post('/api/users/login').send(validUser)
           .then(res => {
             res.should.have.status(200);
@@ -137,7 +137,7 @@ describe('api/users', () => {
         }).catch(err => console.log(err));
     });
     it('Should return an error object if password doesn\'t match', done => {
-      chai.request(app).post('/api/users/new_user').send(validUser).then(res => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
         chai.request(app).post('/api/users/login').send(invalidPassword)
           .then(res => {
             res.should.have.status(400);

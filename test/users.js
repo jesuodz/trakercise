@@ -26,7 +26,7 @@ describe('api/users', () => {
   });
 
   describe('GET /test', () => {
-    it('should return \'/api/users/\' works!', done => {
+    it('Should return \'/api/users/\' works!', done => {
       chai.request(app).get('/api/users/test/test')
       .end((error, res) => {
           res.should.have.status(200);
@@ -165,7 +165,7 @@ describe('api/users', () => {
   });
 
   describe('PUT /account', () => {
-    it('Should return a success message if not valid', done => {
+    it('Should return a success message if sent data is valid', done => {
       chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
         chai.request(app).post('/api/users/login').send(validUser).then(res => {
             const auth = { 'Authorization' : res.body.token };

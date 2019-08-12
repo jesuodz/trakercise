@@ -19,7 +19,7 @@ chai.use(chaiHTTP);
 
 describe('api/users', () => {
   
-  beforeEach( done => {
+  afterEach( done => {
     User.deleteMany({}, (err, res) => done());	
   });
 
@@ -106,7 +106,7 @@ describe('api/users', () => {
   });
 
   describe('POST /login', () => {
-    it('Should return an error object if password doesn\'t match', done => {
+    it('Should return a token if login is successful', done => {
       chai.request(app).post('/api/users/new_user').send(validUser).then(res => {
         chai.request(app).post('/api/users/login').send(validUser)
           .then(res => {
@@ -143,7 +143,21 @@ describe('api/users', () => {
             res.body.should.have.property('password', 'Incorrect password');
             done();
           }).catch(err => console.log(err));
-          done();
+      });
+    });
+  });
+
+  describe('DELETE /account', () => {
+    it('Should return a success message if authorization is valid', done => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
+        chai.request(app).post('/api/users/login').send(validUser).then(res => {
+            const auth = { 'Authorization' : res.body.token };
+            chai.request(app).delete('/api/users/account').set(auth)
+              .then(res => {
+                res.body.should.have.property('success', true);
+                done();
+              });
+          }).catch(err => console.log(err));
       });
     });
   });

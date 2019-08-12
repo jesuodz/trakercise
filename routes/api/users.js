@@ -6,17 +6,17 @@ const {
   newUser,
   getUser,
   login,
-  current
+  deleteUser
 } = require('../../controllers/user');
 
 router.get('/test/test', test);
 router.get('/:username', getUser);
-router.get(
-  '/current/user',
-  passport.authenticate('jwt', { session: false }),
-  current
-);
 router.post('/new_user', newUser);
 router.post('/login', login);
+router.delete(
+  '/account',
+  passport.authenticate('jwt', { session: false }),
+  deleteUser
+);
 
 module.exports = router;

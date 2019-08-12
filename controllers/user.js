@@ -66,7 +66,7 @@ const login = (req, res) => {
           });
         } else {
           errors.password = 'Incorrect password'
-          return res.json({success: false, ...errors});
+          return res.status(400).json({success: false, ...errors});
         }
       }).catch(err => console.log(err));
     } else {
@@ -76,8 +76,12 @@ const login = (req, res) => {
   });
 };
 
-const current = (req, res) => {
-  res.json(req.user);
-};
+const deleteUser = (req, res) => {
+  User.findById(req.user._id).then(account => {
+    User.deleteOne().then(() => {
+      res.json({ success: true, deleted: account.id })
+    });
+  }).catch(err => console.log(err));
+}
 
-module.exports = { test, getUser, newUser, login, current };
+module.exports = { test, getUser, newUser, login, deleteUser };

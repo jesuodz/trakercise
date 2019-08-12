@@ -12,7 +12,9 @@ const {
   invalidUser,
   mongoUser,
   emptyUser,
-  invalidPassword
+  invalidPassword,
+  validEditAccount,
+  invalidEditAccount
 } = require('../utils/samples/users');
 
 chai.use(chaiHTTP);
@@ -148,13 +150,42 @@ describe('api/users', () => {
   });
 
   describe('DELETE /account', () => {
-    it('Should return a success message if authorization is valid', done => {
+    it('Should return a success message if authorized', done => {
       chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
         chai.request(app).post('/api/users/login').send(validUser).then(res => {
             const auth = { 'Authorization' : res.body.token };
             chai.request(app).delete('/api/users/account').set(auth)
               .then(res => {
                 res.body.should.have.property('success', true);
+                done();
+              });
+          }).catch(err => console.log(err));
+      });
+    });
+  });
+
+  describe('PUT /account', () => {
+    it('Should return a success message if not valid', done => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
+        chai.request(app).post('/api/users/login').send(validUser).then(res => {
+            const auth = { 'Authorization' : res.body.token };
+            chai.request(app).put('/api/users/account').set(auth).send(validEditAccount)
+              .then(res => {
+                res.body.should.have.property('success', true);
+                done();
+              });
+          }).catch(err => console.log(err));
+      });
+    });
+    it('Should return an error message if data is valid', done => {
+      chai.request(app).post('/api/users/new_user').send(validUser).then(() => {
+        chai.request(app).post('/api/users/login').send(validUser).then(res => {
+            const auth = { 'Authorization' : res.body.token };
+            chai.request(app).put('/api/users/account').set(auth).send(invalidEditAccount)
+              .then(res => {
+                res.should.have.status(400);
+                res.body.should.have.property('password');
+                res.body.should.have.property('email');
                 done();
               });
           }).catch(err => console.log(err));

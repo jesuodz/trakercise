@@ -3,6 +3,7 @@ const User                = require('../models/User');
 const validateNewUser     = require('../validation/User/new');
 const validateParamsUser  = require('../validation/User/params');
 const validateLogin       = require('../validation/User/login');
+const validateEditUser    = require('../validation/User/edit');
 const bcrypt              = require('bcryptjs');
 const jwt                 = require('jsonwebtoken');
 const { SECRET }          = require('../config')();
@@ -80,8 +81,31 @@ const deleteUser = (req, res) => {
   User.findById(req.user._id).then(account => {
     User.deleteOne().then(() => {
       res.json({ success: true, deleted: account.id })
-    });
-  }).catch(err => console.log(err));
-}
+    }).catch(err => console.log(err));
+  });
+};
 
-module.exports = { test, getUser, newUser, login, deleteUser };
+const editUser = (req, res) => {
+  const { errors, isValid } = validateEditUser(req.body);
+
+  if (!isValid) return res.status(400).json(errors);
+
+  (async function() {
+    if (req.body.password) {
+      await bcrypt.genSalt(10).then( async salt => {
+        await bcrypt.hash(req.body.password, salt).then(hash => {
+          req.body.password = hash;
+        }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
+    }
+
+    await User.updateOne(
+      { _id: req.user.id },
+      { $set: req.body },
+      { upsert: true }
+    ).then(() => res.json({ success: true }))
+    .catch(err => console.log(err));
+  })();
+};
+
+module.exports = { test, getUser, newUser, login, deleteUser, editUser };

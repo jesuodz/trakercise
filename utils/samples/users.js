@@ -24,7 +24,15 @@ const
     username: 'test21',
     password: 'abc123aa'
   }
-  emptyUser = {};
+  emptyUser = {},
+  validEditAccount = {
+    email: 'hello@world.com',
+    password: 'abc12345'
+  },
+  invalidEditAccount = {
+    email: 'hello.com',
+    password: 'asd'
+  };
 
 module.exports = {
   validUser,
@@ -32,5 +40,7 @@ module.exports = {
   userNotFound,
   mongoUser,
   emptyUser,
-  invalidPassword
+  invalidPassword,
+  validEditAccount,
+  invalidEditAccount
 };

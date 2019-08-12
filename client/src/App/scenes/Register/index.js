@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
+import axios from 'axios';
+import classnames from 'classnames';
 
 import './index.css';
 
@@ -10,7 +12,8 @@ export default class Register extends Component {
       username: '',
       email: '',
       password: '',
-      confirmPass: ''
+      confirmPass: '',
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -29,10 +32,14 @@ export default class Register extends Component {
       password: this.state.password,
       confirmPass: this.state.confirmPass
     }
-    console.log(newUser);
+  
+    axios.post('/api/users/new_user', newUser)
+      .then(res => console.log(res))
+      .catch(err => this.setState({ errors: err.response.data }));
   }
 
   render() {
+    const { errors } = this.state;
     return(
       <div className='register'>
         <div className='container'>
@@ -44,46 +51,54 @@ export default class Register extends Component {
               <p className='lead'>
                 Create your Trakercise account
               </p>
-              <Form onSubmit={this.handleSubmit}>
+              <Form noValidate onSubmit={this.handleSubmit}>
                 <FormGroup>
-                  <Label for='username'>Username</Label>
                   <Input
                     type='username'
                     name='username'
-                    id='username'
-                    placeholder='Must be between 5 and 50 characters.'
+                    className={classnames({'is-invalid': errors.username})}
+                    placeholder='Your awesome username.'
                     onChange={this.handleChange}
                   />
+                  {errors.username && (
+                    <div className='invalid-feedback'>{errors.username}</div>
+                  )}
                 </FormGroup>
                 <FormGroup>
-                  <Label for='email'>Email</Label>
                   <Input
                     type='email'
                     name='email'
-                    id='email'
-                    placeholder='example@example.com'
+                    className={classnames({'is-invalid': errors.email})}
+                    placeholder='email@example.com'
                     onChange={this.handleChange}
                   />
+                  {errors.email && (
+                    <div className='invalid-feedback'>{errors.email}</div>
+                  )}
                 </FormGroup>
                 <FormGroup>
-                  <Label for='password'>Password</Label>
                   <Input
                     type='password'
                     name='password'
-                    id='password'
-                    placeholder='Must be between 8 and 30 characters.'
+                    className={classnames({'is-invalid': errors.password})}
+                    placeholder='Password'
                     onChange={this.handleChange}
                   />
+                  {errors.password && (
+                    <div className={'invalid-feedback'}>{errors.password}</div>
+                  )}
                 </FormGroup>
                 <FormGroup>
-                  <Label for='confirmPass'>Confirm password</Label>
                   <Input
                     type='password'
                     name='confirmPass'
-                    id='confirmPass'
-                    placeholder='Please repeat your password.'
+                    className={classnames({'is-invalid': errors.confirmPass})}
+                    placeholder='Repeat your password'
                     onChange={this.handleChange}
                   />
+                  {errors.confirmPass && (
+                    <div className={'invalid-feedback'}>{errors.confirmPass}</div>
+                  )}
                 </FormGroup>
                 <Button
                   type='submit'

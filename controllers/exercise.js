@@ -10,7 +10,7 @@ const add = (req, res) => {
   if (!isValid) return res.status(400).json(errors);
 
   const newExercise = new Exercise({
-    user_id: req.body.username,
+    user_id: req.user.id,
     description: req.body.description,
     duration: req.body.duration
   });

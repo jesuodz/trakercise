@@ -47,7 +47,7 @@ describe('api/exercise', () => {
         chai.request(app).post('/api/exercise/add').set(auth).send(validExercise)
           .then(res => {
             res.should.have.status(200);
-            res.body.should.have.property('user_id', validExercise.username);
+            res.body.should.have.property('user_id');
             res.body.should.have.property('duration', Number(validExercise.duration));
             res.body.should.have.property('description', validExercise.description);
             done();
@@ -60,7 +60,6 @@ describe('api/exercise', () => {
         chai.request(app).post('/api/exercise/add').set(auth).send(invalidExercise)
           .then(res => {
             res.should.have.status(400);
-            res.body.should.have.property('username', 'Username must be between 5 and 50 characters');
             res.body.should.have.property('duration', 'Duration field is required');
             res.body.should.have.property('description', 'Description must be between 5 and 140 characters');
             done();

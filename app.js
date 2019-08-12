@@ -26,6 +26,14 @@ mongoose.connect(config.MONGO_URI, config.OPTIONS)
 app.use('/api/users/', users);
 app.use('/api/exercise/', exercise);
 
+if (config.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 app.listen(config.PORT, () => {
   console.log(`...Listening on port ${config.PORT}...`);
   console.log(`...Running server on ${config.NODE_ENV} mode...`)

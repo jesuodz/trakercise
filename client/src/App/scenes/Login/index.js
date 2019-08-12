@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import axios from 'axios';
+import classnames from 'classnames';
 
 import './index.css';
 
@@ -9,7 +10,8 @@ export default class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,11 +30,13 @@ export default class Login extends Component {
     };
 
     axios.post('/api/users/login', user).then(res => {
-      console.log(res);
-    }).catch(err => console.log(err));
+      console.log(res.data);
+    }).catch(err => this.setState({ errors: err.response.data }));
   }
 
   render() {
+    const { errors } = this.state;
+
     return(
       <div className='login'>
         <div className='container'>
@@ -49,19 +53,25 @@ export default class Login extends Component {
                   <Input
                     type='username'
                     name='username'
-                    id='username'
+                    className={classnames({'is-invalid': errors.username})}
                     placeholder='Username'
                     onChange={this.handleChange}
                   />
+                  {errors.username && (
+                    <div className='invalid-feedback'>{errors.username}</div>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <Input
                     type='password'
                     name='password'
-                    id='password'
+                    className={classnames({'is-invalid': errors.password})}
                     placeholder='Password'
                     onChange={this.handleChange}
                   />
+                  {errors.password && (
+                    <div className='invalid-feedback'>{errors.password}</div>
+                  )}
                 </FormGroup>
                 <Button
                   type='submit'

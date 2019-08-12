@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import axios from 'axios';
 
 import './index.css';
 
@@ -29,7 +30,10 @@ export default class Register extends Component {
       password: this.state.password,
       confirmPass: this.state.confirmPass
     }
-    console.log(newUser);
+  
+    axios.post('/api/users/new_user', newUser)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 
   render() {

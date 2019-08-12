@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
+import axios from 'axios';
 
 import './index.css';
 
@@ -25,7 +26,10 @@ export default class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    console.log(user);
+
+    axios.post('/api/users/login', user).then(res => {
+      console.log(res);
+    }).catch(err => console.log(err));
   }
 
   render() {

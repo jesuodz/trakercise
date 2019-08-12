@@ -35,6 +35,26 @@ const get = (req, res) => {
       return res.status(404).json(errors);
     }
   }).catch(err => console.log(err));
-}
+};
 
-module.exports = { test, add, get };
+const del = (req, res) => {
+  const { errors, isValid } = validateParamsId(req.params.id);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  Exercise.findById(req.params.id).then(exercise => {
+    if (exercise) {
+      Exercise.deleteOne({ _id: req.params.id }).then(() => {
+        return res.json({ success: true });
+      });
+    }
+    else {
+      errors.exercisenotfound = 'Exercise not found';
+      return res.status(404).json(errors);
+    }
+  }).catch(err => console.log(err));
+};
+
+module.exports = { test, add, get, del };

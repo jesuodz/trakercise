@@ -4,7 +4,8 @@ const passport  = require('passport');
 const {
   test,
   add,
-  get
+  get,
+  del
 } = require('../../controllers/exercise');
 
 router.get('/test/test', test);
@@ -14,5 +15,10 @@ router.post(
   add
 );
 router.get('/:id', get);
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  del
+);
 
 module.exports = router;

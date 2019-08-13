@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 import axios from 'axios';
 import classnames from 'classnames';
+import ButtonSubmit from '../../components/ButtonSubmit';
+import HeaderSign from '../components/HeaderSign';
 
 import './index.css';
 
@@ -42,12 +44,7 @@ export default class Login extends Component {
         <div className='container'>
           <div className='row'>
             <div className='col-md-8'>
-              <h1 className='display-4 mb-5'>
-                Log in
-              </h1>
-              <p className='lead'>
-                Login into your Trakercise account
-              </p>
+              <HeaderSign title='Log in' desc='Login into your Trakercise account' />
               <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
                   <Input
@@ -73,13 +70,7 @@ export default class Login extends Component {
                     <div className='invalid-feedback'>{errors.password}</div>
                   )}
                 </FormGroup>
-                <Button
-                  type='submit'
-                  color='primary'
-                  outline
-                >
-                  Log in
-                </Button>
+                <ButtonSubmit content={'Log in'}/>
               </Form>
             </div>
           </div>

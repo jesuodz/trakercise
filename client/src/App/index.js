@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Landing from './scenes/Landing';
-import Register from './scenes/Register';
-import Login from './scenes/Login';
+import Register from './scenes/Sign/Register';
+import Login from './scenes/Sign/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';

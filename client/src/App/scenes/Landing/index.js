@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import ButtonLink from '../../components/ButtonLink';
 
 import './index.css';
 
@@ -11,18 +11,14 @@ export default class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-4 mb-5">
+                <h1 className="display-1 mb-3">
                   Trakercise
                 </h1>
-                <p className="lead">
+                <p className="lead mb-5">
                   Create your account and start tracking and sharing your exercise progress!
                 </p>
-                <Link className="btn btn-lg btn-primary" to="/new_user">
-                  Sign Up
-                </Link>
-                <Link className="btn btn-lg btn-secondary" to="/login">
-                  Login
-                </Link>
+                <ButtonLink styles={'btn btn-lg btn-primary'} href='/new_user' content='Sign up' />
+                <ButtonLink styles={'btn btn-lg btn-secondary'} href='/login' content='Login' />
               </div>
             </div>
           </div>

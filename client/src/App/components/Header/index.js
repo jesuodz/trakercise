@@ -6,7 +6,7 @@ import {
   NavItem,
   Nav
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import ButtonLink from '../../components/ButtonLink';
 
 export default class Header extends Component {
   constructor(props) {
@@ -23,21 +23,15 @@ export default class Header extends Component {
     return(
       <header>
         <Navbar color='dark' dark expand='md'>
-          <Link className="navbar-brand" to='/'>
-            Trakercise
-          </Link>
+          <ButtonLink styles={'navbar-brand'} href='/' content='Trakercise' />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <Link className='nav-link' to='/new_user'>
-                  Sign up
-                </Link>
+                <ButtonLink styles={'nav-link'} href='/new_user' content='Sign up' />
               </NavItem>
               <NavItem>
-                <Link className='nav-link' to='/login'>
-                  Login
-                </Link>
+                <ButtonLink styles={'nav-link'} href='/login' content='Login' />
               </NavItem>
             </Nav>
           </Collapse>

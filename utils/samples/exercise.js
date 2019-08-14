@@ -6,6 +6,10 @@ const
   invalidExercise = {
     description: 'Push'
   },
+  newExercise = {
+    description: 'Push up',
+    duration: '9'
+  },
   wrongID = data => {
     return data._id.slice(1) + 1;
   };
@@ -13,5 +17,6 @@ const
 module.exports = {
   validExercise,
   invalidExercise,
-  wrongID
+  wrongID,
+  newExercise
 };

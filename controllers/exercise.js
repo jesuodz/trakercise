@@ -1,7 +1,8 @@
-const Exercise          = require('../models/Exercise');
-const User              = require('../models/User');
-const validateExercise  = require('../validation/Exercise/exercise');
-const validateParamsId  = require('../validation/Exercise/paramsId');
+const Exercise              = require('../models/Exercise');
+const User                  = require('../models/User');
+const validateExercise      = require('../validation/Exercise/exercise');
+const validateParamsId      = require('../validation/Exercise/paramsId');
+const validateEditExercise  = require('../validation/Exercise/edit');
 
 const test = (req, res) => res.json({ msg: '\'/api/exercise/\' works!'});
 
@@ -50,11 +51,25 @@ const del = (req, res) => {
         return res.json({ success: true });
       });
     }
-    else {
+
+const edit = (req, res) => {
+  const data = { id: req.params.id, ...req.body };
+  const { errors, isValid } = validateEditExercise(data);
+
+  if (!isValid) return res.status(400).json(errors);
+
+  Exercise.findById(req.params.id).then(exercise => {
+    if (exercise) {
+      Exercise.updateOne(
+        {_id: req.params.id },
+        { $set: req.body },
+        { upsert: true }
+      ).then(() => res.json({ success: true })).catch(err => console.log(err));
+    } else {
       errors.exercisenotfound = 'Exercise not found';
       return res.status(404).json(errors);
     }
-  }).catch(err => console.log(err));
+  });
 };
 
-module.exports = { test, add, get, del };
+module.exports = { test, add, get, del, edit };

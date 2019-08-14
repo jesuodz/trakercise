@@ -79,10 +79,12 @@ const login = (req, res) => {
 
 const deleteUser = (req, res) => {
   User.findById(req.user._id).then(account => {
-    User.deleteOne({ _id: account._id }).then(() => {
-      res.json({ success: true, deleted: account.id })
+    Exercise.deleteMany({ user_id: account._id }).then(() => {
+      User.deleteOne({ _id: account._id }).then(() => {
+        res.json({ success: true, deleted: account.id })
+      }).catch(err => console.log(err));
     }).catch(err => console.log(err));
-  });
+  }).catch(err => console.log(err));
 };
 
 const editUser = (req, res) => {

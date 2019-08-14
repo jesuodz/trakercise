@@ -95,7 +95,7 @@ describe('api/exercise', () => {
           .then(() => {
             chai.request(app).get('/api/exercise/' + 1).then(res => {
               res.should.have.status(400);
-              res.body.should.have.property('invalidID', 'Exercise ID not found');
+              res.body.should.have.property('invalidID', 'Invalid Exercise ID');
               done();
             });
           });
@@ -131,14 +131,14 @@ describe('api/exercise', () => {
           });
       });
     });
-    it('Should return \'Exercise ID not found\' if sent ID is not valid', done => {
+    it('Should return \'Invalid Exercise ID\' if sent ID is not valid', done => {
       chai.request(app).post('/api/users/login').send(validUser).then(res => {
         const auth = { 'Authorization' : res.body.token };
         chai.request(app).post('/api/exercise/add').set(auth).send(validExercise)
           .then(() => {
             chai.request(app).delete('/api/exercise/' + 1).set(auth).then(res => {
               res.should.have.status(400);
-              res.body.should.have.property('invalidID', 'Exercise ID not found');
+              res.body.should.have.property('invalidID', 'Invalid Exercise ID');
               done();
             });
           });

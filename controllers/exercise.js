@@ -41,16 +41,19 @@ const get = (req, res) => {
 const del = (req, res) => {
   const { errors, isValid } = validateParamsId(req.params.id);
 
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+  if (!isValid) return res.status(400).json(errors);
 
   Exercise.findById(req.params.id).then(exercise => {
     if (exercise) {
       Exercise.deleteOne({ _id: req.params.id }).then(() => {
         return res.json({ success: true });
       });
+    } else {
+      errors.exercisenotfound = 'Exercise not found';
+      return res.status(404).json(errors);
     }
+  }).catch(err => console.log(err));
+};
 
 const edit = (req, res) => {
   const data = { id: req.params.id, ...req.body };

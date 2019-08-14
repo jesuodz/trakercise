@@ -5,7 +5,7 @@ const validateParamsId = data => {
   const errors = {}
 
   if (!mongoose.Types.ObjectId.isValid(data)) {
-    errors.invalidID = 'Exercise ID not found';
+    errors.invalidID = 'Invalid Exercise ID';
   }
 
   return {

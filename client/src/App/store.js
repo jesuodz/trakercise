@@ -1,6 +1,7 @@
-import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import registerReducer from './scenes/Sign/Register/reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { registerReducer } from './services/api/';
 
 const rootReducer = combineReducers({
   auth: registerReducer
@@ -8,8 +9,7 @@ const rootReducer = combineReducers({
 
 export default createStore(
   rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(
+    applyMiddleware(thunk)
   )
 );

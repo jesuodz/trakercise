@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { createNewUser } from '../actions';
+import { createNewUser } from '../../../services/api';
 import classnames from 'classnames';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import HeaderSign from '../components/HeaderSign';
@@ -15,8 +15,7 @@ class Register extends Component {
       username: '',
       email: '',
       password: '',
-      confirmPass: '',
-      errors: {}
+      confirmPass: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -40,7 +39,7 @@ class Register extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const errors = this.props.errors;
     return(
       <div className='register'>
         <div className='container'>
@@ -106,4 +105,8 @@ class Register extends Component {
   };
 };
 
-export default connect(null, { createNewUser })(Register);
+const mapStateToProps = state => ({
+  errors: state.auth.errors
+});
+
+export default connect(mapStateToProps, { createNewUser })(Register);

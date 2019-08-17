@@ -1,1 +1,1 @@
-export const CREATE_NEW_USER = 'CREATE_NEW_USER';
+export const GET_ERRORS = 'GET_ERRORS';

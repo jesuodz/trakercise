@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import registerReducer from './scenes/Sign/Register/reducer';
 
 const rootReducer = combineReducers({
-  register: registerReducer
+  auth: registerReducer
 });
 
 export default createStore(

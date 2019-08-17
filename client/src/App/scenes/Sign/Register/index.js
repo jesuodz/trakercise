@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { createNewUser } from './actions';
+import { createNewUser } from '../actions';
 import classnames from 'classnames';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import HeaderSign from '../components/HeaderSign';
@@ -36,7 +36,7 @@ class Register extends Component {
       confirmPass: this.state.confirmPass
     }
   
-    this.props.createNewUser(newUser);
+    this.props.createNewUser(newUser, this.props.history);
   }
 
   render() {

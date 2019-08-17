@@ -1,8 +1,8 @@
-import { CREATE_NEW_USER } from './types';
+import { GET_ERRORS } from './types';
 
 export default (state = {}, action) => {
   switch(action.type) {
-    case CREATE_NEW_USER:
+    case GET_ERRORS:
       return {
         ...state,
         data: action.payload

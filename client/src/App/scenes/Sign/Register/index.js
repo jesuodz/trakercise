@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input } from 'reactstrap';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { createNewUser } from '../../../services/Auth';
 import classnames from 'classnames';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import HeaderSign from '../components/HeaderSign';
 
 import './index.css';
 
-export default class Register extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       email: '',
       password: '',
-      confirmPass: '',
-      errors: {}
+      confirmPass: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -35,13 +35,11 @@ export default class Register extends Component {
       confirmPass: this.state.confirmPass
     }
   
-    axios.post('/api/users/new_user', newUser)
-      .then(res => console.log(res))
-      .catch(err => this.setState({ errors: err.response.data }));
+    this.props.createNewUser(newUser, this.props.history);
   }
 
   render() {
-    const { errors } = this.state;
+    const errors = this.props.errors;
     return(
       <div className='register'>
         <div className='container'>
@@ -106,3 +104,9 @@ export default class Register extends Component {
     );
   };
 };
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { createNewUser })(Register);

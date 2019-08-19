@@ -14,7 +14,8 @@ class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -34,9 +35,15 @@ class Login extends Component {
 
     this.props.loginUser(user);
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   render() {
-    const errors = this.props.errors;
+    const { errors } = this.state;
 
     return(
       <div className='login'>

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, FormGroup, Input } from 'reactstrap';
-import axios from 'axios';
+import { loginUser } from '../../../services/Auth';
+import { connect } from 'react-redux';
 import classnames from 'classnames';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import HeaderSign from '../components/HeaderSign';
 
 import './index.css';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: '',
-      errors: {}
+      password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,13 +32,11 @@ export default class Login extends Component {
       password: this.state.password
     };
 
-    axios.post('/api/users/login', user).then(res => {
-      console.log(res.data);
-    }).catch(err => this.setState({ errors: err.response.data }));
+    this.props.loginUser(user);
   }
 
   render() {
-    const { errors } = this.state;
+    const errors = this.props.errors;
 
     return(
       <div className='login'>
@@ -79,3 +78,14 @@ export default class Login extends Component {
     );
   };
 };
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

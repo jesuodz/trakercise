@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';  
 import { Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { createNewUser } from '../../../services/Auth';
@@ -103,6 +104,10 @@ class Register extends Component {
       </div>
     );
   };
+};
+
+Register.propTypes = {
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

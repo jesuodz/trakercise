@@ -1,4 +1,4 @@
-import { GET_ERRORS } from './types';
+import { GET_ERRORS } from '../types';
 import axios from 'axios';
 
 export const createNewUser = (data, history) => dispatch => {

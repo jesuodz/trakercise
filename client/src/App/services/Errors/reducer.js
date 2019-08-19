@@ -1,10 +1,6 @@
-import { GET_ERRORS } from './types';
+import { GET_ERRORS } from '../types';
 
-const initialState = {
-  errors: {}
-}
-
-export default (state = initialState, action) => {
+export default (state = {}, action) => {
   switch(action.type) {
     case GET_ERRORS:
       return {

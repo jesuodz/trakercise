@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { createNewUser } from '../../../services/api';
+import { createNewUser } from '../../../services/Auth';
 import classnames from 'classnames';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import HeaderSign from '../components/HeaderSign';
@@ -106,7 +106,7 @@ class Register extends Component {
 };
 
 const mapStateToProps = state => ({
-  errors: state.auth.errors
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, { createNewUser })(Register);

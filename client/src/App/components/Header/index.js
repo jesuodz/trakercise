@@ -23,15 +23,15 @@ export default class Header extends Component {
     return(
       <header>
         <Navbar color='dark' dark expand='md'>
-          <ButtonLink styles={'navbar-brand'} href='/' content='Trakercise' />
+          <ButtonLink styles='navbar-brand' href='/' text='Trakercise' />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <ButtonLink styles={'nav-link'} href='/new_user' content='Sign up' />
+                <ButtonLink styles='nav-link' href='/new_user' text='Sign up' />
               </NavItem>
               <NavItem>
-                <ButtonLink styles={'nav-link'} href='/login' content='Login' />
+                <ButtonLink styles='nav-link' href='/login' text='Login' />
               </NavItem>
             </Nav>
           </Collapse>

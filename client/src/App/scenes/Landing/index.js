@@ -17,8 +17,16 @@ export default class Landing extends Component {
                 <p className="lead mb-5">
                   Create your account and start tracking and sharing your exercise progress!
                 </p>
-                <ButtonLink styles={'btn btn-lg btn-primary'} href='/new_user' content='Sign up' />
-                <ButtonLink styles={'btn btn-lg btn-secondary'} href='/login' content='Login' />
+                <ButtonLink
+                  styles='btn btn-lg btn-primary'
+                  href='/new_user'
+                  text='Sign up'
+                  />
+                <ButtonLink
+                  styles='btn btn-lg btn-secondary'
+                  href='/login'
+                  text='Login'
+                />
               </div>
             </div>
           </div>

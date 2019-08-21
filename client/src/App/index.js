@@ -4,6 +4,7 @@ import Register from './scenes/Sign/Register';
 import Login from './scenes/Sign/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './scenes/Dashboard';
 import Account from './scenes/Account';
 import { BrowserRouter as Router,
@@ -17,7 +18,6 @@ import store from './store';
 import './index.css';
 
 if (localStorage.exetrakerToken) {
-  console.log(localStorage.exetrakerToken);
   setAuthToken(localStorage.exetrakerToken);
   const decoded = jwt_decode(localStorage.exetrakerToken);
   store.dispatch(setCurrentUser(decoded));
@@ -33,10 +33,10 @@ export default class App extends Component {
             <div className='App-body container'>
               <Route exact path='/' component={Landing} />
               <Switch>
-                <Route exact path='/dashboard' component={Dashboard} />
+                <PrivateRoute exact path='/dashboard' component={Dashboard} />
               </Switch>
               <Switch>
-                <Route exact path='/account' component={Account} />
+                <PrivateRoute exact path='/account' component={Account} />
               </Switch>
               <Route exact path='/new_user' component={Register} />
               <Route exact path='/login' component={Login} />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import ButtonLink from '../../components/ButtonLink';
 
 class Dashboard extends Component {
   render() {
@@ -10,9 +11,16 @@ class Dashboard extends Component {
     return (
       <div>
         { isAuthenticated ? (
-            <h1 className="display-1 mb-3">
-              Hello! { user.username }
-            </h1>
+            <React.Fragment>
+              <h1 className='display-1 mb-3'>
+                Hello! { user.username }
+              </h1>
+              <ButtonLink
+                styles='btn btn-primary'
+                href={'/account'}
+                content={'Account'}
+              />
+            </React.Fragment>
           ) : (
             <Redirect to='/login' />
           )

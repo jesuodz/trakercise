@@ -5,6 +5,7 @@ import Login from './scenes/Sign/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './scenes/Dashboard';
+import Account from './scenes/Account';
 import { BrowserRouter as Router,
   Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -33,6 +34,9 @@ export default class App extends Component {
               <Route exact path='/' component={Landing} />
               <Switch>
                 <Route exact path='/dashboard' component={Dashboard} />
+              </Switch>
+              <Switch>
+                <Route exact path='/account' component={Account} />
               </Switch>
               <Route exact path='/new_user' component={Register} />
               <Route exact path='/login' component={Login} />

@@ -1,5 +1,7 @@
-import { GET_ERRORS, SET_CURRENT_USER } from '../types';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../../utils/setAuthToken';
+import { GET_ERRORS, SET_CURRENT_USER } from '../types';
 
 export const createNewUser = (data, history) => dispatch => {
   axios
@@ -14,12 +16,21 @@ export const createNewUser = (data, history) => dispatch => {
 export const loginUser = data => dispatch => {
   axios
     .post('/api/users/login', data)
-    .then(res => dispatch({
-      type: SET_CURRENT_USER,
-      payload: res.data.token
-    }))
+    .then(res => {
+      const { token } = res.data;
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded))
+    })
     .catch(err => dispatch({
       type: GET_ERRORS,
       payload: err.response.data
     }))
 }
+
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
+};

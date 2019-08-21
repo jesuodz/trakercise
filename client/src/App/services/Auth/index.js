@@ -1,4 +1,4 @@
 import authReducer from './reducer';
-import { createNewUser, loginUser } from './actions';
+import { createNewUser, loginUser, setCurrentUser } from './actions';
 
-export { authReducer, createNewUser, loginUser };
+export { authReducer, createNewUser, loginUser, setCurrentUser };

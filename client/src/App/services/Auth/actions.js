@@ -18,6 +18,7 @@ export const loginUser = data => dispatch => {
     .post('/api/users/login', data)
     .then(res => {
       const { token } = res.data;
+      localStorage.setItem('exetrakerToken', token);
       setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded))

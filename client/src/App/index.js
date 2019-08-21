@@ -8,9 +8,19 @@ import Dashboard from './scenes/Dashboard';
 import { BrowserRouter as Router,
   Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import setAuthToken from './utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
+import { setCurrentUser } from './services/Auth';
 import store from './store';
 
 import './index.css';
+
+if (localStorage.exetrakerToken) {
+  console.log(localStorage.exetrakerToken);
+  setAuthToken(localStorage.exetrakerToken);
+  const decoded = jwt_decode(localStorage.exetrakerToken);
+  store.dispatch(setCurrentUser(decoded));
+}
 
 export default class App extends Component {
   render() {

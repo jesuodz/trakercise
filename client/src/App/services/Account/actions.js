@@ -1,4 +1,5 @@
 import { SET_CURRENT_USER, GET_ERRORS } from '../types';
+import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
 
 export const deleteAccount = () => dispatch => {
@@ -13,4 +14,14 @@ export const deleteAccount = () => dispatch => {
       type: GET_ERRORS,
       payload: err.response.data
     }));
-}
+};
+
+export const logoutAccount = () => dispatch => {
+  localStorage.removeItem('exetrakerToken');
+  setAuthToken(false);
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: {}
+  });
+  window.location.href='/login';
+};

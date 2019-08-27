@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser } from './services/Auth';
+import { logoutAccount } from './services/Account/actions';
 import store from './store';
 
 import './index.css';
@@ -20,7 +21,10 @@ import './index.css';
 if (localStorage.exetrakerToken) {
   setAuthToken(localStorage.exetrakerToken);
   const decoded = jwt_decode(localStorage.exetrakerToken);
-  store.dispatch(setCurrentUser(decoded));
+  // Validate user session
+  const currTime = Date.now() / 1000;
+  if (decoded.exp < currTime) store.dispatch(logoutAccount());
+  else store.dispatch(setCurrentUser(decoded));
 }
 
 export default class App extends Component {

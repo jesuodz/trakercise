@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteAccount } from '../../services/Account/actions';
-import { Button } from 'reactstrap';
+import { Button, Container, Row, Col } from 'reactstrap';
 
 class Account extends Component {
   
@@ -14,16 +14,20 @@ class Account extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div>
-        <p>{user.username}</p>
-        <Button
-          color='danger' 
-          size='sm'
-          onClick={this.deleteHandler}
-        >
-          Delete account
-        </Button>
-      </div>
+      <Container>
+        <Row>
+          <Col md='12'>
+            <p>{user.username}</p>
+            <Button
+              color='danger' 
+              size='sm'
+              onClick={this.deleteHandler}
+            >
+              Delete account
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

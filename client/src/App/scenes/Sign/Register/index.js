@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';  
-import { Form } from 'reactstrap';
+import { Form, Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { createNewUser } from '../../../services/Auth';
 import ButtonSubmit from '../../components/ButtonSubmit';
@@ -57,9 +57,9 @@ class Register extends Component {
 
     return(
       <div className='register'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-8'>
+        <Container>
+          <Row>
+            <Col md='8'>
               <HeaderSign title='Sign up' desc='Create your Trakercise account' />
               <Form noValidate onSubmit={this.handleSubmit}>
                 <FormGroupInput
@@ -92,9 +92,9 @@ class Register extends Component {
                 />
                 <ButtonSubmit content="Create account" />
               </Form>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   };

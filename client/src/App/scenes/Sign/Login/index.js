@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'reactstrap';
 import { loginUser } from '../../../services/Auth';
 import { connect } from 'react-redux';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import HeaderSign from '../components/HeaderSign';
 import FormGroupInput from '../../components/FormGroupInput';
+import { Form, Container, Row, Col } from 'reactstrap';
 
 import './index.css';
 
@@ -56,9 +56,9 @@ class Login extends Component {
 
     return(
       <div className='login'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-8'>
+        <Container>
+          <Row>
+            <Col md='8'>
               <HeaderSign title='Log in' desc='Login into your Trakercise account' />
               <Form onSubmit={this.handleSubmit}>
                 <FormGroupInput
@@ -77,9 +77,9 @@ class Login extends Component {
                 />
                 <ButtonSubmit content={'Log in'}/>
               </Form>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   };

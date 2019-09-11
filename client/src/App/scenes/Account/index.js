@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteAccount } from '../../services/Account/actions';
+import { deleteAccount } from '../../services/Account';
 import { Button, Container, Row, Col } from 'reactstrap';
+import AccountData from './components/AccountData';
+
+/**
+ * TODO
+ * 
+ * - Edit button
+ */
 
 class Account extends Component {
   
@@ -11,17 +18,15 @@ class Account extends Component {
   }
 
   render() {
-    const { user } = this.props.auth;
-
     return (
       <Container>
         <Row>
           <Col md='12'>
-            <p>{user.username}</p>
+            <AccountData />
             <Button
               color='danger' 
-              size='sm'
               onClick={this.deleteHandler}
+              outline
             >
               Delete account
             </Button>
@@ -30,15 +35,10 @@ class Account extends Component {
       </Container>
     );
   }
-}
+};
 
 Account.propTypes = {
-  auth: PropTypes.object.isRequired,
   deleteAccount: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps, { deleteAccount })(Account);
+export default connect(null, { deleteAccount })(Account);

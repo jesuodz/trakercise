@@ -27,7 +27,7 @@ export const loginUser = data => dispatch => {
       type: GET_ERRORS,
       payload: err.response.data
     }))
-}
+};
 
 export const setCurrentUser = decoded => {
   return {

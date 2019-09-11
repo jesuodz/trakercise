@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_ERRORS } from '../types';
+import { SET_CURRENT_USER, GET_ERRORS, GET_ACCOUNT_DATA } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
 
@@ -24,4 +24,16 @@ export const logoutAccount = () => dispatch => {
     payload: {}
   });
   window.location.href='/login';
+};
+
+export const getAccountData = id => dispatch => {
+  axios
+    .get(`/api/users/${id}`)
+    .then(res => {
+      const { password, ...userData } = res.data;
+      dispatch({
+        type: GET_ACCOUNT_DATA,
+        payload: userData
+      })
+    });
 };

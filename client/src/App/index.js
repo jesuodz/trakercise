@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser } from './services/Auth';
-import { logoutAccount } from './services/Account/actions';
+import { logoutAccount } from './services/Account';
 import store from './store';
 
 import './index.css';
